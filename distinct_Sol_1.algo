@@ -1,0 +1,59 @@
+ALGORITHM distinct_Sol_1
+VAR
+//-----------------declaration of array---------------------
+ Set1 : ARRAY_OF INTEGER[4];
+ Set2 : ARRAY_OF INTEGER[5];
+ i,j,sum : INTEGER;
+ duplicate: BOOLEAN;  // boolean which test presence of the element in the array
+
+ BEGIN
+
+ //---------------Set-1-----------------------------
+
+ i,Sum := 0;
+ duplicate := false; 
+
+WHILE (i< (Set1.length) ) DO  
+
+    FOR j FROM 0 TO Set2.length - 1 STEP step DO 
+
+    IF (Set1[i] == Set2[j]) THEN
+        duplicate := True; 
+        Break;
+    END_IF
+
+    END_FOR
+
+    IF  (duplicate == True) THEN
+        i := i + 1 ;
+    ELSE
+        Sum := Sum + Set1[i]; //duplicate == false
+    END_IF
+
+END_WHILE
+
+//---------------Set-2--------------------------
+
+   i:= 0;
+   duplicate := false; 
+
+ WHILE (j< (Set2.length) ) DO
+
+    FOR i FROM 0 TO Set1.length - 1 STEP step DO
+    IF (Set2[j] == Set1[i]) THEN
+        duplicate := True; 
+        Break;
+    END_IF
+    END_FOR
+
+    IF  (duplicate == True) THEN
+         j:= j + 1 ;
+    ELSE
+        Sum := Sum + Set2[j];
+    END_IF
+
+ END_WHILE
+
+    Write(Sum);
+    
+END

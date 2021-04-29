@@ -1,0 +1,55 @@
+ALGORITHM overl_Sol_2
+VAR
+    //--------declaration of HashTABLES--------
+
+    hTab: HASH_TABLE<INTEGER,INTEGER>; // hash table (key: INTEGER ,value: INTEGER)
+
+    //---------declaration of array-----------
+
+    Set1 : ARRAY_OF INTEGER[20];
+    Set2 : ARRAY_OF INTEGER[15];
+
+    i,j,element,count,sum:INTEGER;
+    duplicate:BOOLEAN;
+    str: String[50];
+
+BEGIN
+
+// Set1:={12,13,6,10}
+// Set2:={13,10,16,15}
+
+ duplicate:=false;
+FOR i FROM 0 TO Set1.length - 1  STEP step  DO
+    FOR  j FROM 0 TO Set2.length - 1  STEP step  DO
+
+        IF ( ((hTab.lookup(Set1[i]) && hTab.lookup(Set2[j])) == True) && (Set1[i] == Set2[j]) ) THEN
+
+        duplicate := True;
+        element := Set1[i]; 
+        count:=hTab.get(element);
+        hTab.insert(element,count + 2); //appears 2 times (one of the Set1 , one of the Set2) //
+
+        ELSE
+
+        duplicate := False;
+        hTab.insert(element,1); //appears 1 time 
+
+        END_IF
+
+
+    END_FOR
+END_FOR
+
+    WHILE (hTab.lookup(element)) DO // while our HashTable contains keys "element" test the values "count"
+
+        IF  ( count == 2 ) THEN
+             sum :=  sum + element * count;   //sum:= sum + element + count*2 
+        END_IF
+
+      hTab.increment;  //Next element of hTab
+        
+    END_WHILE
+
+ Write('Sum of overlapping elements: ' +sum);
+  
+END

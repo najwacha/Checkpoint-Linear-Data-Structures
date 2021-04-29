@@ -1,0 +1,27 @@
+ALGORITHM overl_Sol_1
+VAR
+//--------------declaration of array--------
+ Set1 : ARRAY_OF INTEGER[4];
+ Set2 : ARRAY_OF INTEGER[5];
+ i,j,sum : INTEGER;
+
+BEGIN
+
+ sum:=0;
+ 
+FOR i FROM 0 TO Set1.length - 1 STEP step  DO
+
+    FOR j FROM 0 TO Set2.length - 1 STEP step  DO
+
+    IF (Set1[i] == Set2[j]) THEN
+        sum := sum + Set1[i] + Set2[j]; 
+        break; 
+    END_IF
+
+    END_FOR
+    
+END_FOR
+
+ Write(sum); 
+    
+END

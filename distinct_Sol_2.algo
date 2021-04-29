@@ -1,0 +1,51 @@
+ALGORITHM distinct_Sol_2
+VAR 
+    //-------------declaration of HashTABLES-----------------------
+
+    hTab: HASH_TABLE<INTEGER,INTEGER>; // hash table (key: INTEGER ,value: INTEGER)
+
+    //--------------declaration of array-------------------------------
+
+    Set1 : ARRAY_OF INTEGER[10];
+    Set2 : ARRAY_OF INTEGER[11];
+
+
+    str: String[50]; 
+    i,count:INTEGER;
+
+BEGIN
+
+    str:= Array.toString(Set1) + Array.toString(Set2);
+    // Example: str:="317924193" 
+    // Set1 :={3,1,7,9} concat Set2 :={2,4,1,9,3}
+    //Insert all the elements from both the sets with the element as key and its count (in both arrays)
+
+    FOR i FROM 0 TO str.length STEP step DO
+
+        IF (hTab.lookup(str[i]) == True) THEN
+
+            count := hTab.get(str[i]); // get the value of the index i exp ('3',0): '3': key 0: value of count)
+            hTab.insert(str[i],count+1); // increment the value +1 if str[i] is repeated
+
+        ELSE
+             hTab.insert(str[i],1);  //the key appears one time
+        END_IF
+
+    END_FOR
+
+    //--Now iterate through the constructed map and sum all the elements with count = 1. ----
+    
+    i:=0;
+    While(i< str.length) DO
+    
+    IF (hTab.get(str[i]) == 1) THEN // test if the value of hTab = 1 then sum the key value of hTab!
+        sum := sum + str[i];
+    END_IF
+
+     i:= i+1; 
+
+    END_WHILE
+
+    Write(Sum);
+    
+END
